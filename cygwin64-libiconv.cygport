@@ -1,0 +1,39 @@
+CROSS_HOST="x86_64-pc-cygwin"
+inherit cross
+
+NAME="cygwin64-libiconv"
+VERSION=1.14
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Iconv for Cygwin 64bit toolchain"
+DESCRIPTION=
+HOMEPAGE="http://www.gnu.org/software/libiconv/"
+SRC_URI="http://ftp.gnu.org/pub/gnu/libiconv/libiconv-${VERSION}.tar.gz"
+SRC_DIR="libiconv-${VERSION}"
+
+PATCH_URI="
+	libiconv-1.14-reloc.patch
+	libiconv-1.14-wchar.patch
+"
+
+DISTCLEANFILES="m4/libtool.m4 m4/lt*.m4"
+
+src_compile() {
+	cd ${S}
+	ACLOCAL_FLAGS="-I ${S}/m4 -I ${S}/srcm4"
+	cygautoreconf
+	cd ${B}
+	cygconf --enable-static \
+		am_cv_proto_iconv_arg1= \
+		am_cv_proto_iconv="extern size_t iconv (iconv_t cd, char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);"
+	cygmake
+}
+
+src_install() {
+	cd ${B}
+	cyginstall
+	rm -fr ${D}/usr/share/doc/${NAME}/*.html
+	rm -fr ${D}${CROSS_DATADIR}/man/
+}
+
+KEEP_LA_FILES="none"
