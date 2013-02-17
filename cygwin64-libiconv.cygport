@@ -3,7 +3,7 @@ inherit cross
 
 NAME="cygwin64-libiconv"
 VERSION=1.14
-RELEASE=1
+RELEASE=2
 CATEGORY="Devel"
 SUMMARY="Iconv for Cygwin 64bit toolchain"
 DESCRIPTION=
@@ -32,8 +32,10 @@ src_compile() {
 src_install() {
 	cd ${B}
 	cyginstall
+	rm -f ${D}${CROSS_BINDIR}/*.exe
+	rm -f ${D}${CROSS_LIBDIR}/charset.alias
 	rm -fr ${D}/usr/share/doc/${NAME}/*.html
-	rm -fr ${D}${CROSS_DATADIR}/man/
+	rm -fr ${D}${CROSS_DATADIR}/{locale,man}/
 }
 
 KEEP_LA_FILES="none"
