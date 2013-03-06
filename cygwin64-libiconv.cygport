@@ -3,7 +3,7 @@ inherit cross
 
 NAME="cygwin64-libiconv"
 VERSION=1.14
-RELEASE=2
+RELEASE=3
 CATEGORY="Devel"
 SUMMARY="Iconv for Cygwin 64bit toolchain"
 DESCRIPTION=
