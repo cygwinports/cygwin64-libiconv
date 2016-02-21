@@ -3,15 +3,17 @@ inherit cross
 
 NAME="cygwin64-libiconv"
 VERSION=1.14
-RELEASE=3
+RELEASE=4
 CATEGORY="Devel"
 SUMMARY="Iconv for Cygwin 64bit toolchain"
-DESCRIPTION=
+DESCRIPTION="This library provides an iconv() implementation, for use on systems
+which don't have one, or whose implementation cannot convert from/to Unicode."
 HOMEPAGE="http://www.gnu.org/software/libiconv/"
 SRC_URI="http://ftp.gnu.org/pub/gnu/libiconv/libiconv-${VERSION}.tar.gz"
 SRC_DIR="libiconv-${VERSION}"
 
 PATCH_URI="
+	libiconv-1.14-aliases.patch
 	libiconv-1.14-reloc.patch
 	libiconv-1.14-wchar.patch
 "
